@@ -1,10 +1,6 @@
 package WorldMap;
-
-import org.lwjgl.glfw.GLFW;
-
 import Game.Screen;
 import Graphics.Sprite;
-import Input.Input;
 import Input.Keyboard;
 
 public class WMPlayer {

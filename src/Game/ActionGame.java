@@ -16,7 +16,6 @@ import java.util.Properties;
 
 import javax.swing.JFrame;
 
-
 import Entity.Mob.Player;
 import Graphics.Font;
 import Graphics.Sprite;
@@ -29,6 +28,7 @@ import Sounds.SoundEffect;
 import UI.Map;
 import WorldMap.WMPlayer;
 import WorldMap.WorldMap;
+
 public class ActionGame extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private static int scale = 1;
@@ -100,7 +100,7 @@ public class ActionGame extends Canvas implements Runnable {
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
 		WorldMap.load("/worldmap.png");
-		
+
 	}
 
 	public void saveOptions() {
@@ -206,10 +206,11 @@ public class ActionGame extends Canvas implements Runnable {
 			frames++;
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
+				frame.setTitle(title + " | " + updates + " ups, " + frames + " fps");
 				updates = 0;
 				frames = 0;
 			}
-			
+
 		}
 		stop();
 	}
@@ -252,8 +253,7 @@ public class ActionGame extends Canvas implements Runnable {
 			} else
 				tflag = true;
 			if (talent) {
-				if ((key.up || key.down || key.left || key.right || key.f || gpadUP || gpadDOWN || gpadRIGHT || gpadLEFT
-						|| gpadA)) {
+				if ((key.up || key.down || key.left || key.right || key.f || gpadUP || gpadDOWN || gpadRIGHT || gpadLEFT || gpadA)) {
 					if ((key.up || gpadUP) && tcflag) {
 						talentIndexD--;
 						if (talentIndexD < 0)
@@ -461,7 +461,7 @@ public class ActionGame extends Canvas implements Runnable {
 			dif = cursorPos;
 			// player = new Player(806 * 32, 78 * 32, key, dif, controller);
 			// player = new Player(54 * 32, 206 * 32, key, dif, controller);
-			player = new Player(26 * 32, 3104, dif,key);
+			player = new Player(26 * 32, 3104, dif, key);
 			// level = new Level2("/level2.png", dif);
 			level = new SpawnLevel("/level1.png", dif);
 			// level = new Level5("/level5.png", dif);
@@ -476,8 +476,7 @@ public class ActionGame extends Canvas implements Runnable {
 			WorldMap.player = player;
 			wmPlayer = new WMPlayer(180 * 32, 24 * 32);
 			WorldMap.wmPlayer = wmPlayer;
-		} else if (!key.up && !key.down && !key.enter && !key.space && !gpadUP && !gpadDOWN && !gpadA && !gpadB
-				&& !key.esc)
+		} else if (!key.up && !key.down && !key.enter && !key.space && !gpadUP && !gpadDOWN && !gpadA && !gpadB && !key.esc)
 			flag = true;
 	}
 
@@ -570,7 +569,7 @@ public class ActionGame extends Canvas implements Runnable {
 			return;
 		}
 
-		 screen.clear();
+		screen.clear();
 		if (startScreen) {
 			renderStartScreen(screen);
 		} else if (player.worldMap) {
@@ -589,7 +588,8 @@ public class ActionGame extends Canvas implements Runnable {
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.setColor(Color.ORANGE);
-		if (!startScreen) g.drawString("X: " + player.x / 32 + " Y: " + player.y / 32, width - 100, 20);
+		if (!startScreen)
+			g.drawString("X: " + player.x / 32 + " Y: " + player.y / 32, width - 100, 20);
 		g.dispose();
 		bs.show();
 	}
